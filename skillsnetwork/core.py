@@ -144,13 +144,14 @@ async def download(
     Downloads file located at URL to path.
 
     >>> import skillsnetwork
-    >>> await skillsnetwork.download("https://example.com/myfile", filename=filename)
-    >>> with open(filename, "r") as f:
+    >>> path = './my_file.txt'
+    >>> await skillsnetwork.download("https://example.com/myfile", path)
+    >>> with open(path, "r") as f:
     >>>     content = f.read()
 
-    :param url: URL where file is located.
-    :param path: The path to which the file at URL should be downloaded.
-    :param chunk_size: Number of bytes to read from url at a time.
+    :param url: The URL where the file is located.
+    :param path: The path to which the file at URL should be downloaded. Auto-generated from url by default.
+    :param chunk_size: The number of bytes to read from url at a time.
     :raise FileNotFoundError: If path is invalid.
     :raise skillsnetwork.InvalidURLException: If URL is invalid.
     """
@@ -173,9 +174,10 @@ async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
     Reads file at URL into bytes
 
     >>> import skillsnetwork
-    >>> content = await skillsnetwork.read("https://example.com/myfile")
+    >>> content = await skillsnetwork.read("https://example.com/myfile") # Is bytes
+    >>> content_str = content.decode()                                   # Is str
 
-    :param url: str of URL where file is located.
+    :param url: The URL where the file is located.
     :param chunk_size: Number of bytes to read from url at a time.
     :returns: bytes containing file located at URL
     :raise FileNotFoundError: If path is invalid.
@@ -192,8 +194,8 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     >>> import skillsnetwork
     >>> await skillsnetwork.prepare("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-ML0187EN-SkillsNetwork/labs/module%203/images/images.tar.gz")
 
-    :param url: the URL to download the dataset from
-    :param path: the path the dataset will be available at
+    :param url: The URL to download the dataset from.
+    :param path: The path the dataset will be available at. Current working directory by default.
     :raise InvalidURLException: When URL is invalid.
     :raise FileExistsError: it raises this when a file to be symlinked already exists.
     :raise ValueError: When requested path is in /tmp.
