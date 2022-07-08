@@ -1,0 +1,6 @@
+﻿skillsnetwork.InvalidURLException
+=================================
+
+.. currentmodule:: skillsnetwork
+
+.. autoexception:: InvalidURLException

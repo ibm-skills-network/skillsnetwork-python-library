@@ -1,0 +1,40 @@
+﻿skillsnetwork
+=============
+
+.. automodule:: skillsnetwork
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      download
+      download_dataset
+      prepare
+      prepare_dataset
+      read
+      read_dataset
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      InvalidURLException
+   
+   
+
+
+

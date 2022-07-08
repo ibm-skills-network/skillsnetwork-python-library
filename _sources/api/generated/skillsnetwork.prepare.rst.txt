@@ -1,0 +1,6 @@
+﻿skillsnetwork.prepare
+=====================
+
+.. currentmodule:: skillsnetwork
+
+.. autofunction:: prepare
