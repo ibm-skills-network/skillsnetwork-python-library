@@ -1,0 +1,38 @@
+name: Publish Release to PyPI
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Install poetry
+      uses: abatilo/actions-poetry@v2.0.0
+    - name: Install project dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        make install-extras
+    - name: Set package version
+      run: poetry version "${{ github.event.release.tag_name }}"
+    - name: Build the Package
+      run: poetry build
+    - name: Update Release with Built Package
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: "${{ github.event.release.tag_name }}"
+        files: |
+          dist/*
+    - name: run tests
+      # Only run tests for skillsnetwork since cv studio tests not working from CI
+      run: poetry run pytest tests/ -k 'test_skillsnetwork.py'
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
