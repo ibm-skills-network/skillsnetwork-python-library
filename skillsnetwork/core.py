@@ -144,7 +144,7 @@ async def download(
     Downloads file located at URL to path.
 
     >>> import skillsnetwork
-    >>> path = './my_file.txt'
+    >>> path = "./my_file.txt"
     >>> await skillsnetwork.download("https://example.com/myfile", path)
     >>> with open(path, "r") as f:
     >>>     content = f.read()
