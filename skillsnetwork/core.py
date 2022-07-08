@@ -214,7 +214,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     tmp_download_file = Path(f"/tmp/{tmp_extract_dir.name}-{filename}")
     # Download the dataset to tmp_download_file file
     # File will be overwritten if it already exists
-    await download(url, tmp_download_file)
+    await download(url, tmp_download_file, verbose=False)
 
     # Delete tmp_extract_dir directory if it already exists
     if tmp_extract_dir.is_dir():
@@ -264,7 +264,6 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
 
 
 if _is_jupyterlite():
-    print("TEST")
     tqdm.monitor_interval = 0
 
 # For backwards compatibility
