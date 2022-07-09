@@ -128,7 +128,9 @@ async def test_prepare_dataset_zip_with_path(httpserver):
 async def test_prepare_non_compressed_dataset_with_path(httpserver):
     url = "/test.csv"
     path = "."
+    expected_path = Path("./test.csv")
     with open("tests/test.csv", "rb") as expected_data:
         httpserver.expect_request(url).respond_with_data(expected_data)
         await skillsnetwork.prepare_dataset(httpserver.url_for(url), path=path)
-    assert Path("./test.csv").exists()
+    assert expected_path.exists()
+    expected_path.unlink()
