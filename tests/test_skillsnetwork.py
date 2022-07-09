@@ -9,7 +9,6 @@ from random import choice
 from string import ascii_uppercase
 
 
-
 def test_backwards_compatibility():
     assert skillsnetwork.read == skillsnetwork.read_dataset
     assert skillsnetwork.download == skillsnetwork.download_dataset
