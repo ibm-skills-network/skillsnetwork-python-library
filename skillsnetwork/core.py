@@ -189,7 +189,8 @@ async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
 async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) -> None:
     """
     Prepares a dataset for learners. Downloads a dataset from the given url,
-    decompresses it if necessary, and symlinks it so it's available in the desired path.
+    decompresses it if necessary. If not using jupyterlite, will extract to
+    /tmp and and symlink it so it's available at the desired path.
 
     >>> import skillsnetwork
     >>> await skillsnetwork.prepare("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-ML0187EN-SkillsNetwork/labs/module%203/images/images.tar.gz")
@@ -198,7 +199,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     :param path: The path the dataset will be available at. Current working directory by default.
     :raise InvalidURLException: When URL is invalid.
     :raise FileExistsError: it raises this when a file to be symlinked already exists.
-    :raise ValueError: When requested path is in /tmp.
+    :raise ValueError: When requested path is in /tmp, or path is not a directory, or path doesn't exist.
     """
 
     filename = Path(urlparse(url).path).name
@@ -206,12 +207,18 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     # Check if path contains /tmp
     if Path("/tmp") in path.parents:
         raise ValueError("path must not be in /tmp")
+    elif path.is_file():
+        raise ValueError("Datasets must be prepared to directories, not files")
     # Create the target path if it doesn't exist yet
     path.mkdir(exist_ok=True)
 
     # For avoiding collisions with any other files the user may have downloaded to /tmp/
-    tmp_extract_dir = Path(f"/tmp/skills-network-{hash(url)}")
-    tmp_download_file = Path(f"/tmp/{tmp_extract_dir.name}-{filename}")
+
+    dname = f"skills-network-{hash(url)}"
+    # The file to extract data to. If not jupyterlite, to be symlinked to as well
+    tmp_extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
+    # The file to download the (possible) compressed data to
+    tmp_download_file = Path(f"/tmp/{dname}-{filename}")
     # Download the dataset to tmp_download_file file
     # File will be overwritten if it already exists
     await download(url, tmp_download_file, verbose=False)
@@ -252,12 +259,16 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
                 zf.extract(member=member, path=tmp_extract_dir)
         tmp_download_file.unlink()
     else:
-        _verify_files_dont_exist([path / tmp_download_file.name])
-        pass  # No extraction necessary
+        tmp_download_file.rename(tmp_extract_dir / filename)
+        _verify_files_dont_exist([path / filename])
 
-    # Now symlink top-level file objects in tmp_extract_dir
-    for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
-        (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
+    if _is_jupyterlite():
+        # If in jupyterlite environment, just move the file from the tmp_extract_dir to the desired location
+        (tmp_extract_dir / filename).rename(path / filename)
+    else:
+        # If not in jupyterlite environment, symlink top-level file objects in tmp_extract_dir
+        for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
+            (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
         print(relpath(path.resolve()))

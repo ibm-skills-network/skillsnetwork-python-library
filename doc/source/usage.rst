@@ -93,7 +93,7 @@ This confirms the dataset was extracted to your current working directory in you
 .. code-block:: python
    
    from pathlib import Path
-   for path in Path(".").rglob("*"):
+   for path in Path(".").iterdir():
        print(path)
 
 .. code-block:: console
