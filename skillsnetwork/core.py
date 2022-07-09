@@ -259,8 +259,8 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
                 zf.extract(member=member, path=tmp_extract_dir)
         tmp_download_file.unlink()
     else:
-        tmp_download_file.rename(tmp_extract_dir / filename)
         _verify_files_dont_exist([path / filename])
+        tmp_download_file.rename(tmp_extract_dir / filename)
 
     if _is_jupyterlite():
         # If in jupyterlite environment, just move the file from the tmp_extract_dir to the desired location
