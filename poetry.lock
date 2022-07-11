@@ -66,7 +66,7 @@ tests = ["pytest"]
 
 [[package]]
 name = "atomicwrites"
-version = "1.4.0"
+version = "1.4.1"
 description = "Atomic file writes."
 category = "dev"
 optional = false
@@ -240,7 +240,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "debugpy"
-version = "1.6.1"
+version = "1.6.2"
 description = "An implementation of the Debug Adapter Protocol for Python"
 category = "main"
 optional = false
@@ -402,7 +402,7 @@ python-versions = "*"
 
 [[package]]
 name = "ipykernel"
-version = "6.15.0"
+version = "6.15.1"
 description = "IPython Kernel for Jupyter"
 category = "main"
 optional = false
@@ -533,7 +533,7 @@ dev = ["hypothesis"]
 
 [[package]]
 name = "jsonschema"
-version = "4.6.1"
+version = "4.7.1"
 description = "An implementation of JSON Schema validation for Python"
 category = "main"
 optional = false
@@ -573,7 +573,7 @@ test = ["codecov", "coverage", "ipykernel (>=6.5)", "ipython", "mypy", "pre-comm
 
 [[package]]
 name = "jupyter-core"
-version = "4.10.0"
+version = "4.11.1"
 description = "Jupyter core package. A base package on which Jupyter projects rely."
 category = "main"
 optional = false
@@ -677,7 +677,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "jupyterlite"
-version = "0.1.0b10"
+version = "0.1.0b11"
 description = "tools for building JupyterLite sites"
 category = "dev"
 optional = false
@@ -1478,11 +1478,11 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "urllib3"
-version = "1.26.9"
+version = "1.26.10"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4"
 
 [package.extras]
 brotli = ["brotlicffi (>=0.8.0)", "brotli (>=1.0.9)", "brotlipy (>=0.6.0)"]
@@ -1559,7 +1559,7 @@ regular = ["ibm-cos-sdk"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "7257ad784425285064a6ebf7db3fd5ad531ff99496581a324cb60950a36033ca"
+content-hash = "2a0c1cfb484bfa88f2689c14b515bc8a16d8b9c303b4f94fac8b4737d458b481"
 
 [metadata.files]
 alabaster = [
@@ -1601,10 +1601,7 @@ argon2-cffi-bindings = [
     {file = "argon2_cffi_bindings-21.2.0-pp38-pypy38_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ed2937d286e2ad0cc79a7087d3c272832865f779430e0cc2b4f3718d3159b0cb"},
     {file = "argon2_cffi_bindings-21.2.0-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:5e00316dabdaea0b2dd82d141cc66889ced0cdcbfa599e8b471cf22c620c329a"},
 ]
-atomicwrites = [
-    {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
-    {file = "atomicwrites-1.4.0.tar.gz", hash = "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"},
-]
+atomicwrites = []
 attrs = [
     {file = "attrs-21.4.0-py2.py3-none-any.whl", hash = "sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4"},
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
@@ -1740,26 +1737,7 @@ colorama = [
     {file = "colorama-0.4.5-py2.py3-none-any.whl", hash = "sha256:854bf444933e37f5824ae7bfc1e98d5bce2ebe4160d46b5edf346a89358e99da"},
     {file = "colorama-0.4.5.tar.gz", hash = "sha256:e6c6b4334fc50988a639d9b98aa429a0b57da6e17b9a44f0451f930b6967b7a4"},
 ]
-debugpy = [
-    {file = "debugpy-1.6.1-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:dea24307e6899ab884e3b9186f325b9f83cb46ba7d770575abfd4da555b310af"},
-    {file = "debugpy-1.6.1-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:f8ab446c75113d43fdeaaa295cce5a2916ae3ddb24afebd18787a6c2d9b5adb9"},
-    {file = "debugpy-1.6.1-cp310-cp310-win32.whl", hash = "sha256:f781f403940c82ac29ccad4705cd3970294c5a3c4eea5e45a9c651564d34b3f3"},
-    {file = "debugpy-1.6.1-cp310-cp310-win_amd64.whl", hash = "sha256:b63d8feaa2215545418a94df768589e35550e5f8daa94daf7cdbe4a9a8123db7"},
-    {file = "debugpy-1.6.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:5b38c0a9930ea7140a968b33f7ce55c3861e47bef26ba6ef36e477853c983b27"},
-    {file = "debugpy-1.6.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:43eaed06ead05de1eba321c7189c42ee6811cc4f55bd6d3dbc89285d9edf663c"},
-    {file = "debugpy-1.6.1-cp37-cp37m-win32.whl", hash = "sha256:6ef57c6f8c6299c54689e112782e40af2783958b6b6eb81a627d33913c658259"},
-    {file = "debugpy-1.6.1-cp37-cp37m-win_amd64.whl", hash = "sha256:1bce0aa8960a449e759cd2c6394b95f1271a09a15371116eb0d6383d1bed1d6e"},
-    {file = "debugpy-1.6.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:1beee50ec98e967b964ac96716cc02cca2c19ca4b848be79469135e403fb9ed2"},
-    {file = "debugpy-1.6.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:a1ffad8691686fd3306e44533a02e334c4b9c8fd10ac13829a937d7bb02c9fc3"},
-    {file = "debugpy-1.6.1-cp38-cp38-win32.whl", hash = "sha256:aa886a30ed75ee1b126053e6536b41e5ac7be8fdb2bc67660cfeb6bdbab3da37"},
-    {file = "debugpy-1.6.1-cp38-cp38-win_amd64.whl", hash = "sha256:3917b4ffc34a6768ce9d5b43d971f0714f4604d479255f56c4be061aa7f9731e"},
-    {file = "debugpy-1.6.1-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:7bc92cef6b3cf45c3f3116fdfa8e5710c5daaea046a5b9ae8dab610446fed80a"},
-    {file = "debugpy-1.6.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:7765ed172809ec8b82348c0f001982bb507ec6c6c6e556931ed81771c82f2cd7"},
-    {file = "debugpy-1.6.1-cp39-cp39-win32.whl", hash = "sha256:24035f4fea3163bac400237b4a0ecb0fd5dc0070b78c04a1db4716e3bda39f03"},
-    {file = "debugpy-1.6.1-cp39-cp39-win_amd64.whl", hash = "sha256:d3014ba32499f9fe932e8333d71715ed80b2dd23e60f3e3152df9faf254b1ebe"},
-    {file = "debugpy-1.6.1-py2.py3-none-any.whl", hash = "sha256:24af3e63b3124e7c5be7ae4c06e95835a7c3930989825dc4cdf43828e1a1695b"},
-    {file = "debugpy-1.6.1.zip", hash = "sha256:0262625927d81c9ee046df12a7c9429d829e28d5b744341773b6de98c607d58f"},
-]
+debugpy = []
 decorator = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
     {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
@@ -1813,10 +1791,7 @@ iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
-ipykernel = [
-    {file = "ipykernel-6.15.0-py3-none-any.whl", hash = "sha256:b9ed519a29eb819eb82e87e0d3754088237b233e5c647b8bb0ff23c8c70ed16f"},
-    {file = "ipykernel-6.15.0.tar.gz", hash = "sha256:b59f9d9672c3a483494bb75915a2b315e78b833a38b039b1ee36dc28683f0d89"},
-]
+ipykernel = []
 ipython = [
     {file = "ipython-7.34.0-py3-none-any.whl", hash = "sha256:c175d2440a1caff76116eb719d40538fbb316e214eda85c5515c303aacbfb23e"},
     {file = "ipython-7.34.0.tar.gz", hash = "sha256:af3bdb46aa292bce5615b1b2ebc76c2080c5f77f54bda2ec72461317273e7cd6"},
@@ -1844,18 +1819,12 @@ jmespath = [
 json5 = [
     {file = "json5-0.9.8.tar.gz", hash = "sha256:0fa6e4d3ef062f93ba9cf2a9103fe8e68c7917dfa33519ae3ac8c7e48e3c84ff"},
 ]
-jsonschema = [
-    {file = "jsonschema-4.6.1-py3-none-any.whl", hash = "sha256:5eb781753403847fb320f05e9ab2191725b58c5e7f97f1bed63285ca423159bc"},
-    {file = "jsonschema-4.6.1.tar.gz", hash = "sha256:ec2802e6a37517f09d47d9ba107947589ae1d25ff557b925d83a321fc2aa5d3b"},
-]
+jsonschema = []
 jupyter-client = [
     {file = "jupyter_client-7.3.4-py3-none-any.whl", hash = "sha256:17d74b0d0a7b24f1c8c527b24fcf4607c56bee542ffe8e3418e50b21e514b621"},
     {file = "jupyter_client-7.3.4.tar.gz", hash = "sha256:aa9a6c32054b290374f95f73bb0cae91455c58dfb84f65c8591912b8f65e6d56"},
 ]
-jupyter-core = [
-    {file = "jupyter_core-4.10.0-py3-none-any.whl", hash = "sha256:e7f5212177af7ab34179690140f188aa9bf3d322d8155ed972cbded19f55b6f3"},
-    {file = "jupyter_core-4.10.0.tar.gz", hash = "sha256:a6de44b16b7b31d7271130c71a6792c4040f077011961138afed5e5e73181aec"},
-]
+jupyter-core = []
 jupyter-server = [
     {file = "jupyter_server-1.18.1-py3-none-any.whl", hash = "sha256:022759b09c96a4e2feb95de59ce4283e04e17782efe197b91d23a47521609b77"},
     {file = "jupyter_server-1.18.1.tar.gz", hash = "sha256:2b72fc595bccae292260aad8157a0ead8da2c703ec6ae1bb7b36dbad0e267ea7"},
@@ -1876,10 +1845,7 @@ jupyterlab-widgets = [
     {file = "jupyterlab_widgets-1.1.1-py3-none-any.whl", hash = "sha256:90ab47d99da03a3697074acb23b2975ead1d6171aa41cb2812041a7f2a08177a"},
     {file = "jupyterlab_widgets-1.1.1.tar.gz", hash = "sha256:67d0ef1e407e0c42c8ab60b9d901cd7a4c68923650763f75bf17fb06c1943b79"},
 ]
-jupyterlite = [
-    {file = "jupyterlite-0.1.0b10-py3-none-any.whl", hash = "sha256:1d3380a63e4f33a555f897c91a46b9fcb67d6db9dc5841242c7c3946d42456b4"},
-    {file = "jupyterlite-0.1.0b10.tar.gz", hash = "sha256:2d872f4257546ee4925d2c640ba72d35927941115572572bf170552c88212d1a"},
-]
+jupyterlite = []
 macfsevents = [
     {file = "MacFSEvents-0.8.1.tar.gz", hash = "sha256:1324b66b356051de662ba87d84f73ada062acd42b047ed1246e60a449f833e10"},
 ]
@@ -2315,10 +2281,7 @@ typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
     {file = "typing_extensions-4.3.0.tar.gz", hash = "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"},
 ]
-urllib3 = [
-    {file = "urllib3-1.26.9-py2.py3-none-any.whl", hash = "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14"},
-    {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
-]
+urllib3 = []
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
     {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
