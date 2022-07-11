@@ -219,7 +219,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     dname = f"skills-network-{hash(url)}"
     # The file to extract data to. If not jupyterlite, to be symlinked to as well
     tmp_extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
-    # The file to download the (possible) compressed data to
+    # The file to download the (possibly) compressed data to
     tmp_download_file = Path(f"/tmp/{dname}-{filename}")
     # Download the dataset to tmp_download_file file
     # File will be overwritten if it already exists
@@ -266,7 +266,8 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
 
     if _is_jupyterlite():
         # If in jupyterlite environment, just move the file from the tmp_extract_dir to the desired location
-        (tmp_extract_dir / filename).rename(path / filename)
+        for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
+            child.rename(path / child.name)
     else:
         # If not in jupyterlite environment, symlink top-level file objects in tmp_extract_dir
         for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
