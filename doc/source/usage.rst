@@ -58,11 +58,11 @@ Use the :func:`skillsnetwork.download` function to download files:
    import skillsnetwork
    await skillsnetwork.download("https://www.example.com/my/file.json")
 
-By default, the saved path will be printed:
+By default, the saved path will be printed (See the :func:`skillsnetwork.download` api to change):
 
 .. code-block:: console
 
-   ./file.json
+   Saved as './file.json'
 
 This confirms the file is saved in your lab environment:
 
@@ -82,11 +82,11 @@ Use the :func:`skillsnetwork.prepare` to manage large compressed datasets or dat
    import skillsnetwork
    await skillsnetwork.prepare("https://www.example.com/my/images.zip")
 
-By default, the saved path will be printed:
+By default, the location the extracted data is saved will be printed:
 
 .. code-block:: console
 
-   .
+   Saved to '.'
 
 This confirms the dataset was extracted to your current working directory in your lab environment:
 

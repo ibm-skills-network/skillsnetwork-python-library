@@ -146,6 +146,7 @@ async def download(
     >>> import skillsnetwork
     >>> path = "./my_file.txt"
     >>> await skillsnetwork.download("https://example.com/myfile", path)
+    Saved as './my_file.txt'
     >>> with open(path, "r") as f:
     >>>     content = f.read()
 
@@ -166,7 +167,7 @@ async def download(
         async for chunk in _get_chunks(url, chunk_size):
             f.write(chunk)
     if verbose:
-        print(f"Saved to {relpath(path.resolve())}")
+        print(f"Saved as '{relpath(path.resolve())}'")
 
 
 async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
@@ -194,6 +195,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
 
     >>> import skillsnetwork
     >>> await skillsnetwork.prepare("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-ML0187EN-SkillsNetwork/labs/module%203/images/images.tar.gz")
+    Saved to '.'
 
     :param url: The URL to download the dataset from.
     :param path: The path the dataset will be available at. Current working directory by default.
