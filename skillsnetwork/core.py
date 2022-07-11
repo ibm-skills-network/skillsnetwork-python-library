@@ -131,7 +131,8 @@ def _is_file_to_symlink(path: Path) -> bool:
     :param path: path to check.
     :returns: True if file should be symlinked, False otherwise.
     """
-    return not path.name.startswith("._")  # Don't symlink "._" junk
+    # Don't symlink "._" junk
+    return not (path.name.startswith("._") or path.name in ["__MACOSX"])
 
 
 async def download(
