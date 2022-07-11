@@ -17,6 +17,12 @@ Using the ``pip`` CLI:
 
    $ pip install skillsnetwork
 
+To upgrade or ensure the most recent version is installed:
+
+.. code-block:: console
+
+   $ pip install -U skillsnetwork
+
 JupyterLite
 +++++++++++
 
