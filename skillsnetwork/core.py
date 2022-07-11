@@ -201,7 +201,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     :param path: The path the dataset will be available at. Current working directory by default.
     :raise InvalidURLException: When URL is invalid.
     :raise FileExistsError: it raises this when a file to be symlinked already exists.
-    :raise ValueError: When requested path is in /tmp, or path is not a directory, or path doesn't exist.
+    :raise ValueError: When requested path is in /tmp, or cannot be saved to path.
     """
 
     filename = Path(urlparse(url).path).name
