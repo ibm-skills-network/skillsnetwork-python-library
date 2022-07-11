@@ -218,19 +218,18 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
 
     dname = f"skills-network-{hash(url)}"
     # The file to extract data to. If not jupyterlite, to be symlinked to as well
-    tmp_extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
+    extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
     # The file to download the (possibly) compressed data to
     tmp_download_file = Path(f"/tmp/{dname}-{filename}")
     # Download the dataset to tmp_download_file file
     # File will be overwritten if it already exists
     await download(url, tmp_download_file, verbose=False)
 
-    # Delete tmp_extract_dir directory if it already exists
-    if tmp_extract_dir.is_dir():
-        shutil.rmtree(tmp_extract_dir)
-
-    # Create tmp_extract_dir
-    tmp_extract_dir.mkdir()
+    # Delete extract_dir directory if it already exists
+    if not _is_jupyterlite():
+        if extract_dir.is_dir():
+            shutil.rmtree(extract_dir)
+        extract_dir.mkdir()
 
     if tarfile.is_tarfile(tmp_download_file):
         with tarfile.open(tmp_download_file) as tf:
@@ -244,7 +243,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             pbar = tqdm(iterable=tf.getmembers(), total=len(tf.getmembers()))
             pbar.set_description(f"Extracting {filename}")
             for member in pbar:
-                tf.extract(member=member, path=tmp_extract_dir)
+                tf.extract(member=member, path=extract_dir)
         tmp_download_file.unlink()
     elif zipfile.is_zipfile(tmp_download_file):
         with zipfile.ZipFile(tmp_download_file) as zf:
@@ -258,19 +257,16 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             pbar = tqdm(iterable=zf.infolist(), total=len(zf.infolist()))
             pbar.set_description(f"Extracting {filename}")
             for member in pbar:
-                zf.extract(member=member, path=tmp_extract_dir)
+                zf.extract(member=member, path=extract_dir)
         tmp_download_file.unlink()
     else:
         _verify_files_dont_exist([path / filename])
-        tmp_download_file.rename(tmp_extract_dir / filename)
+        shutil.move(tmp_download_file, extract_dir / filename)
 
-    if _is_jupyterlite():
-        # If in jupyterlite environment, just move the file from the tmp_extract_dir to the desired location
-        for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
-            child.rename(path / child.name)
-    else:
-        # If not in jupyterlite environment, symlink top-level file objects in tmp_extract_dir
-        for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
+    # If in jupyterlite environment, the extract_dir = path, so the files are already there.
+    if not _is_jupyterlite():
+        # If not in jupyterlite environment, symlink top-level file objects in extract_dir
+        for child in filter(_is_file_to_symlink, extract_dir.iterdir()):
             (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
