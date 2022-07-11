@@ -166,7 +166,7 @@ async def download(
         async for chunk in _get_chunks(url, chunk_size):
             f.write(chunk)
     if verbose:
-        print(relpath(path.resolve()))
+        print(f"Saved to {relpath(path.resolve())}")
 
 
 async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
@@ -271,7 +271,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
-        print(relpath(path.resolve()))
+        print(f"Saved to {relpath(path.resolve())}")
 
 
 if _is_jupyterlite():
