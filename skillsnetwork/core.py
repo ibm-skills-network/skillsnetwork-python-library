@@ -146,6 +146,7 @@ async def download(
     >>> import skillsnetwork
     >>> path = "./my_file.txt"
     >>> await skillsnetwork.download("https://example.com/myfile", path)
+    Saved as './my_file.txt'
     >>> with open(path, "r") as f:
     >>>     content = f.read()
 
@@ -166,7 +167,7 @@ async def download(
         async for chunk in _get_chunks(url, chunk_size):
             f.write(chunk)
     if verbose:
-        print(relpath(path.resolve()))
+        print(f"Saved as '{relpath(path.resolve())}'")
 
 
 async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
@@ -189,16 +190,18 @@ async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
 async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) -> None:
     """
     Prepares a dataset for learners. Downloads a dataset from the given url,
-    decompresses it if necessary, and symlinks it so it's available in the desired path.
+    decompresses it if necessary. If not using jupyterlite, will extract to
+    /tmp and and symlink it so it's available at the desired path.
 
     >>> import skillsnetwork
     >>> await skillsnetwork.prepare("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-ML0187EN-SkillsNetwork/labs/module%203/images/images.tar.gz")
+    Saved to '.'
 
     :param url: The URL to download the dataset from.
     :param path: The path the dataset will be available at. Current working directory by default.
     :raise InvalidURLException: When URL is invalid.
     :raise FileExistsError: it raises this when a file to be symlinked already exists.
-    :raise ValueError: When requested path is in /tmp.
+    :raise ValueError: When requested path is in /tmp, or cannot be saved to path.
     """
 
     filename = Path(urlparse(url).path).name
@@ -206,22 +209,27 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
     # Check if path contains /tmp
     if Path("/tmp") in path.parents:
         raise ValueError("path must not be in /tmp")
+    elif path.is_file():
+        raise ValueError("Datasets must be prepared to directories, not files")
     # Create the target path if it doesn't exist yet
     path.mkdir(exist_ok=True)
 
     # For avoiding collisions with any other files the user may have downloaded to /tmp/
-    tmp_extract_dir = Path(f"/tmp/skills-network-{hash(url)}")
-    tmp_download_file = Path(f"/tmp/{tmp_extract_dir.name}-{filename}")
+
+    dname = f"skills-network-{hash(url)}"
+    # The file to extract data to. If not jupyterlite, to be symlinked to as well
+    extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
+    # The file to download the (possibly) compressed data to
+    tmp_download_file = Path(f"/tmp/{dname}-{filename}")
     # Download the dataset to tmp_download_file file
     # File will be overwritten if it already exists
     await download(url, tmp_download_file, verbose=False)
 
-    # Delete tmp_extract_dir directory if it already exists
-    if tmp_extract_dir.is_dir():
-        shutil.rmtree(tmp_extract_dir)
-
-    # Create tmp_extract_dir
-    tmp_extract_dir.mkdir()
+    # Delete extract_dir directory if it already exists
+    if not _is_jupyterlite():
+        if extract_dir.is_dir():
+            shutil.rmtree(extract_dir)
+        extract_dir.mkdir()
 
     if tarfile.is_tarfile(tmp_download_file):
         with tarfile.open(tmp_download_file) as tf:
@@ -235,7 +243,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             pbar = tqdm(iterable=tf.getmembers(), total=len(tf.getmembers()))
             pbar.set_description(f"Extracting {filename}")
             for member in pbar:
-                tf.extract(member=member, path=tmp_extract_dir)
+                tf.extract(member=member, path=extract_dir)
         tmp_download_file.unlink()
     elif zipfile.is_zipfile(tmp_download_file):
         with zipfile.ZipFile(tmp_download_file) as zf:
@@ -249,18 +257,20 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             pbar = tqdm(iterable=zf.infolist(), total=len(zf.infolist()))
             pbar.set_description(f"Extracting {filename}")
             for member in pbar:
-                zf.extract(member=member, path=tmp_extract_dir)
+                zf.extract(member=member, path=extract_dir)
         tmp_download_file.unlink()
     else:
-        _verify_files_dont_exist([path / tmp_download_file.name])
-        pass  # No extraction necessary
+        _verify_files_dont_exist([path / filename])
+        shutil.move(tmp_download_file, extract_dir / filename)
 
-    # Now symlink top-level file objects in tmp_extract_dir
-    for child in filter(_is_file_to_symlink, tmp_extract_dir.iterdir()):
-        (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
+    # If in jupyterlite environment, the extract_dir = path, so the files are already there.
+    if not _is_jupyterlite():
+        # If not in jupyterlite environment, symlink top-level file objects in extract_dir
+        for child in filter(_is_file_to_symlink, extract_dir.iterdir()):
+            (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
-        print(relpath(path.resolve()))
+        print(f"Saved to '{relpath(path.resolve())}'")
 
 
 if _is_jupyterlite():

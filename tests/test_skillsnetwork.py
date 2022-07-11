@@ -1,11 +1,12 @@
 import os
 import shutil
-from random import choice
-from string import ascii_uppercase
-
 import pytest
 import skillsnetwork
+
+from pathlib import Path
 from pytest_httpserver import httpserver
+from random import choice
+from string import ascii_uppercase
 
 
 def test_backwards_compatibility():
@@ -53,7 +54,6 @@ async def test_prepare_dataset_invalid_url():
 
 @pytest.mark.asyncio
 async def test_prepare_dataset_tar_no_path(httpserver):
-
     url = "/test.tar.gz"
     expected_directory = "test"
     try:
@@ -74,10 +74,8 @@ async def test_prepare_dataset_tar_no_path(httpserver):
 
 @pytest.mark.asyncio
 async def test_prepare_dataset_tar_with_path(httpserver):
-
     url = "/test.tar.gz"
     path = "example"
-
     try:
         shutil.rmtree(path)  # clean up any previous test
     except FileNotFoundError:
@@ -92,7 +90,6 @@ async def test_prepare_dataset_tar_with_path(httpserver):
 
 @pytest.mark.asyncio
 async def test_prepare_dataset_zip_no_path(httpserver):
-
     url = "/test.zip"
     expected_directory = "test"
     try:
@@ -113,10 +110,8 @@ async def test_prepare_dataset_zip_no_path(httpserver):
 
 @pytest.mark.asyncio
 async def test_prepare_dataset_zip_with_path(httpserver):
-
     url = "/test.zip"
     path = "tests/example"
-
     try:
         shutil.rmtree(path)  # clean up any previous test
     except FileNotFoundError:
@@ -127,3 +122,15 @@ async def test_prepare_dataset_zip_with_path(httpserver):
         await skillsnetwork.prepare_dataset(httpserver.url_for(url), path=path)
     assert os.path.isdir(path)
     shutil.rmtree(path)
+
+
+@pytest.mark.asyncio
+async def test_prepare_non_compressed_dataset_with_path(httpserver):
+    url = "/test.csv"
+    path = "."
+    expected_path = Path("./test.csv")
+    with open("tests/test.csv", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), path=path)
+    assert expected_path.exists()
+    expected_path.unlink()
