@@ -273,7 +273,7 @@ async def prepare(url: str, path: Optional[str] = None, verbose: bool = True) ->
             (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
-        print(f"Saved to {relpath(path.resolve())}")
+        print(f"Saved to '{relpath(path.resolve())}'")
 
 
 if _is_jupyterlite():
