@@ -2,12 +2,12 @@ import shutil
 import tarfile
 import zipfile
 import IPython
+import os
 
 from pathlib import Path
 from urllib.parse import urlparse
 from typing import List, Union, Optional, Iterable, Generator
 from tqdm.auto import tqdm
-from os.path import relpath
 
 
 __all__ = [
@@ -136,7 +136,7 @@ def _verify_files_dont_exist(
         if path.exists() or path.is_symlink():
             if remove_if_exist:
                 while path.is_symlink():
-                    temp = path.readlink()
+                    temp = Path(os.readlink(path))
                     path.unlink(missing_ok=True)
                     path = temp
                 if path.exists():
@@ -187,7 +187,7 @@ async def download(
         async for chunk in _get_chunks(url, chunk_size):
             f.write(chunk)
     if verbose:
-        print(f"Saved as '{relpath(path.resolve())}'")
+        print(f"Saved as '{os.path.relpath(path.resolve())}'")
 
 
 async def read(url: str, chunk_size: int = DEFAULT_CHUNK_SIZE) -> bytes:
@@ -303,7 +303,7 @@ async def prepare(
             (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:
-        print(f"Saved to '{relpath(path.resolve())}'")
+        print(f"Saved to '{os.path.relpath(path.resolve())}'")
 
 
 def setup() -> None:
