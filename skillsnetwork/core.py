@@ -224,7 +224,7 @@ async def prepare(
     :param verbose=True: Prints saved path if True.
     :param overwrite=False: If True, overwrites any existing files at destination.
     :raise InvalidURLException: When URL is invalid.
-    :raise FileExistsError: When a file to be symlinked already exists and `overwrite=False`.
+    :raise FileExistsError: When a file to be symlinked already exists and overwrite is False.
     :raise ValueError: When requested path is in /tmp, or cannot be saved to path.
     """
 
