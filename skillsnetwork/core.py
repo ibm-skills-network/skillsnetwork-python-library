@@ -114,25 +114,33 @@ async def _get_chunks(url: str, chunk_size: int) -> Generator[bytes, None, None]
             raise Exception(f"Failed to read dataset at {url}") from None
 
 
+def _rmrf(path: Path) -> None:
+    if path.is_dir():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
+
+
 def _verify_files_dont_exist(
-    paths: Iterable[Union[str, Path]], remove_if_exist: bool = False
+    paths: Iterable[Path], remove_if_exist: bool = False
 ) -> None:
     """
     Verifies all paths in 'paths' don't exist.
     :param paths: A iterable of strs or pathlib.Paths.
     :param remove_if_exist=False: Removes file at path if they already exist.
     :returns: None
-    :raises FileExistsError: On the first path found that already exists.
+    :raises FileExistsError: On the first path found that already exists if remove_if_exist is False.
     """
     for path in paths:
-        path = Path(path)
-        if path.exists():
+        # Could be a broken symlink => path.exists() is False
+        if path.exists() or path.is_symlink():
             if remove_if_exist:
-                if path.is_symlink():
-                    realpath = path.resolve()
-                    path.unlink(realpath)
-                else:
-                    shutil.rmtree(path)
+                while path.is_symlink():
+                    temp = path.readlink()
+                    path.unlink(missing_ok=True)
+                    path = temp
+                if path.exists():
+                    _rmrf(path)
             else:
                 raise FileExistsError(f"Error: File '{path}' already exists.")
 
@@ -254,9 +262,9 @@ async def prepare(
                     path / child.name
                     for child in map(Path, tf.getnames())
                     if len(child.parents) == 1 and _is_file_to_symlink(child)
-                ],
-                overwrite,
-            )  # Only check if top-level fileobject
+                ],  # Only check if top-level fileobject
+                remove_if_exist=overwrite,
+            )
             pbar = tqdm(iterable=tf.getmembers(), total=len(tf.getmembers()))
             pbar.set_description(f"Extracting {filename}")
             for member in pbar:
@@ -269,8 +277,8 @@ async def prepare(
                     path / child.name
                     for child in map(Path, zf.namelist())
                     if len(child.parents) == 1 and _is_file_to_symlink(child)
-                ],
-                overwrite,
+                ],  # Only check if top-level fileobject
+                remove_if_exist=overwrite,
             )
             pbar = tqdm(iterable=zf.infolist(), total=len(zf.infolist()))
             pbar.set_description(f"Extracting {filename}")
@@ -278,13 +286,15 @@ async def prepare(
                 zf.extract(member=member, path=extract_dir)
         tmp_download_file.unlink()
     else:
-        _verify_files_dont_exist([path / filename], overwrite)
+        _verify_files_dont_exist([path / filename], remove_if_exist=overwrite)
         shutil.move(tmp_download_file, extract_dir / filename)
 
     # If in jupyterlite environment, the extract_dir = path, so the files are already there.
     if not _is_jupyterlite():
         # If not in jupyterlite environment, symlink top-level file objects in extract_dir
         for child in filter(_is_file_to_symlink, extract_dir.iterdir()):
+            if (path / child.name).is_symlink() and overwrite:
+                (path / child.name).unlink()
             (path / child.name).symlink_to(child, target_is_directory=child.is_dir())
 
     if verbose:

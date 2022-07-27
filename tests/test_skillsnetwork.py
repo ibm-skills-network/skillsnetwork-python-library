@@ -134,3 +134,21 @@ async def test_prepare_non_compressed_dataset_with_path(httpserver):
         await skillsnetwork.prepare_dataset(httpserver.url_for(url), path=path)
     assert expected_path.exists()
     expected_path.unlink()
+
+
+@pytest.mark.asyncio
+async def test_prepare_non_compressed_dataset_with_overwrite(httpserver):
+    url = "/test.csv"
+    expected_path = Path("./test.csv")
+    with open("tests/test.csv", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), overwrite=True)
+    assert expected_path.exists()
+    httpserver.clear()
+    print(expected_path.absolute(), expected_path.absolute().exists())
+    with open("tests/test.csv", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), overwrite=True)
+    assert expected_path.exists()
+    assert Path(expected_path).stat().st_size == 540
+    expected_path.unlink()
