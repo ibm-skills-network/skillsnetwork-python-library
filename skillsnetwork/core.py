@@ -222,9 +222,9 @@ async def prepare(
     :param url: The URL to download the dataset from.
     :param path: The path the dataset will be available at. Current working directory by default.
     :param verbose=True: Prints saved path if True.
-    :param overwrite=False: Overwrites any existing files at destination if they exist.
+    :param overwrite=False: If True, overwrites any existing files at destination.
     :raise InvalidURLException: When URL is invalid.
-    :raise FileExistsError: it raises this when a file to be symlinked already exists.
+    :raise FileExistsError: When a file to be symlinked already exists and `overwrite=False`.
     :raise ValueError: When requested path is in /tmp, or cannot be saved to path.
     """
 
