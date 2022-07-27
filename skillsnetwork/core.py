@@ -89,7 +89,7 @@ async def _get_chunks(url: str, chunk_size: int) -> Generator[bytes, None, None]
                 pbar.update(len(value))
             pbar.close()
         except JsException:
-            raise Exception(f"Failed to read dataset at {url}") from None
+            raise Exception(f"Failed to read dataset at '{url}'.") from None
     else:
         import requests  # pyright: ignore
         from requests.exceptions import ConnectionError  # pyright: ignore
@@ -99,7 +99,7 @@ async def _get_chunks(url: str, chunk_size: int) -> Generator[bytes, None, None]
                 # If requests.get fails, it will return readable error
                 if response.status_code >= 400:
                     raise Exception(
-                        f"received status code {response.status_code} from {url}"
+                        f"received status code {response.status_code} from '{url}'."
                     )
                 pbar = tqdm(
                     miniters=1,
@@ -111,7 +111,7 @@ async def _get_chunks(url: str, chunk_size: int) -> Generator[bytes, None, None]
                     pbar.update(len(chunk))
                 pbar.close()
         except ConnectionError:
-            raise Exception(f"Failed to read dataset at {url}") from None
+            raise Exception(f"Failed to read dataset at '{url}'.") from None
 
 
 def _rmrf(path: Path) -> None:
@@ -126,7 +126,7 @@ def _verify_files_dont_exist(
 ) -> None:
     """
     Verifies all paths in 'paths' don't exist.
-    :param paths: A iterable of pathlib.Paths.
+    :param paths: A iterable of pathlib.Path s.
     :param remove_if_exist=False: Remove each file at each path in paths if they already exist.
     :returns: None
     :raises FileExistsError: On the first path found that already exists if remove_if_exist is False.
@@ -232,9 +232,9 @@ async def prepare(
     path = Path.cwd() if path is None else Path(path)
     # Check if path contains /tmp
     if Path("/tmp") in path.parents:
-        raise ValueError("path must not be in /tmp")
+        raise ValueError("path must not be in /tmp.")
     elif path.is_file():
-        raise ValueError("Datasets must be prepared to directories, not files")
+        raise ValueError("Datasets must be prepared to directories, not files.")
     # Create the target path if it doesn't exist yet
     path.mkdir(exist_ok=True)
 
@@ -254,39 +254,45 @@ async def prepare(
             shutil.rmtree(extract_dir)
         extract_dir.mkdir()
 
-    if tarfile.is_tarfile(tmp_download_file):
-        with tarfile.open(tmp_download_file) as tf:
-            _verify_files_dont_exist(
-                [
-                    path / child.name
-                    for child in map(Path, tf.getnames())
-                    if len(child.parents) == 1 and _is_file_to_symlink(child)
-                ],  # Only check if top-level fileobject
-                remove_if_exist=overwrite,
-            )
-            pbar = tqdm(iterable=tf.getmembers(), total=len(tf.getmembers()))
-            pbar.set_description(f"Extracting {filename}")
-            for member in pbar:
-                tf.extract(member=member, path=extract_dir)
-        tmp_download_file.unlink()
-    elif zipfile.is_zipfile(tmp_download_file):
-        with zipfile.ZipFile(tmp_download_file) as zf:
-            _verify_files_dont_exist(
-                [
-                    path / child.name
-                    for child in map(Path, zf.namelist())
-                    if len(child.parents) == 1 and _is_file_to_symlink(child)
-                ],  # Only check if top-level fileobject
-                remove_if_exist=overwrite,
-            )
-            pbar = tqdm(iterable=zf.infolist(), total=len(zf.infolist()))
-            pbar.set_description(f"Extracting {filename}")
-            for member in pbar:
-                zf.extract(member=member, path=extract_dir)
-        tmp_download_file.unlink()
-    else:
-        _verify_files_dont_exist([path / filename], remove_if_exist=overwrite)
-        shutil.move(tmp_download_file, extract_dir / filename)
+    try:
+        if tarfile.is_tarfile(tmp_download_file):
+            with tarfile.open(tmp_download_file) as tf:
+                _verify_files_dont_exist(
+                    [
+                        path / child.name
+                        for child in map(Path, tf.getnames())
+                        if len(child.parents) == 1 and _is_file_to_symlink(child)
+                    ],  # Only check if top-level fileobject
+                    remove_if_exist=overwrite,
+                )
+                pbar = tqdm(iterable=tf.getmembers(), total=len(tf.getmembers()))
+                pbar.set_description(f"Extracting {filename}")
+                for member in pbar:
+                    tf.extract(member=member, path=extract_dir)
+            tmp_download_file.unlink()
+        elif zipfile.is_zipfile(tmp_download_file):
+            with zipfile.ZipFile(tmp_download_file) as zf:
+                _verify_files_dont_exist(
+                    [
+                        path / child.name
+                        for child in map(Path, zf.namelist())
+                        if len(child.parents) == 1 and _is_file_to_symlink(child)
+                    ],  # Only check if top-level fileobject
+                    remove_if_exist=overwrite,
+                )
+                pbar = tqdm(iterable=zf.infolist(), total=len(zf.infolist()))
+                pbar.set_description(f"Extracting {filename}")
+                for member in pbar:
+                    zf.extract(member=member, path=extract_dir)
+            tmp_download_file.unlink()
+        else:
+            _verify_files_dont_exist([path / filename], remove_if_exist=overwrite)
+            shutil.move(tmp_download_file, extract_dir / filename)
+    except FileExistsError as e:
+        raise FileExistsError(
+            str(e)
+            + "\nIf you want to overwrite any existing files, use prepare(..., overwrite=True)."
+        ) from None
 
     # If in jupyterlite environment, the extract_dir = path, so the files are already there.
     if not _is_jupyterlite():
@@ -303,29 +309,6 @@ async def prepare(
 def setup() -> None:
     if _is_jupyterlite():
         tqdm.monitor_interval = 0
-
-    try:
-        import sys  # pyright: ignore
-
-        ipython = get_ipython()
-
-        def hide_traceback(
-            exc_tuple=None,
-            filename=None,
-            tb_offset=None,
-            exception_only=False,
-            running_compiled_code=False,
-        ):
-            etype, value, tb = sys.exc_info()
-            value.__cause__ = None  # suppress chained exceptions
-            return ipython._showtraceback(
-                etype, value, ipython.InteractiveTB.get_exception_only(etype, value)
-            )
-
-        ipython.showtraceback = hide_traceback
-
-    except NameError:
-        pass
 
 
 setup()
