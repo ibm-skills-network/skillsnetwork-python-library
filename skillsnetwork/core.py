@@ -127,7 +127,7 @@ def _verify_files_dont_exist(
     """
     Verifies all paths in 'paths' don't exist.
     :param paths: A iterable of pathlib.Paths.
-    :param remove_if_exist=False: Removes file at path if they already exist.
+    :param remove_if_exist=False: Remove each file at each path in paths if they already exist.
     :returns: None
     :raises FileExistsError: On the first path found that already exists if remove_if_exist is False.
     """
@@ -239,7 +239,6 @@ async def prepare(
     path.mkdir(exist_ok=True)
 
     # For avoiding collisions with any other files the user may have downloaded to /tmp/
-
     dname = f"skills-network-{hash(url)}"
     # The file to extract data to. If not jupyterlite, to be symlinked to as well
     extract_dir = path if _is_jupyterlite() else Path(f"/tmp/{dname}")
