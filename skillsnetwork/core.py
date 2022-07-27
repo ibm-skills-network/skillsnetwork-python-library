@@ -126,7 +126,7 @@ def _verify_files_dont_exist(
 ) -> None:
     """
     Verifies all paths in 'paths' don't exist.
-    :param paths: A iterable of strs or pathlib.Paths.
+    :param paths: A iterable of pathlib.Paths.
     :param remove_if_exist=False: Removes file at path if they already exist.
     :returns: None
     :raises FileExistsError: On the first path found that already exists if remove_if_exist is False.
