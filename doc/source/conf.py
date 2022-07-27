@@ -23,7 +23,7 @@ copyright = "2022, Bradley Steinfeld, Sam Prokopchuk, James Reeve"
 author = "Bradley Steinfeld, Sam Prokopchuk, James Reeve"
 
 # The full version, including alpha/beta/rc tags
-release = "0.20.5"
+release = "0.20.6"
 
 
 # -- General configuration ---------------------------------------------------

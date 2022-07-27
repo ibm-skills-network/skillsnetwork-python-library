@@ -137,7 +137,7 @@ def _verify_files_dont_exist(
             if remove_if_exist:
                 while path.is_symlink():
                     temp = Path(os.readlink(path))
-                    path.unlink(missing_ok=True)
+                    path.unlink()
                     path = temp
                 if path.exists():
                     _rmrf(path)
