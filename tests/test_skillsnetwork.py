@@ -134,3 +134,76 @@ async def test_prepare_non_compressed_dataset_with_path(httpserver):
         await skillsnetwork.prepare_dataset(httpserver.url_for(url), path=path)
     assert expected_path.exists()
     expected_path.unlink()
+
+
+@pytest.mark.asyncio
+async def test_prepare_non_compressed_dataset_no_path_with_overwrite(httpserver):
+    url = "/test.csv"
+    expected_path = Path("./test.csv")
+    with open("tests/test.csv", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url))
+    assert expected_path.exists()
+    httpserver.clear()
+    with open("tests/test.csv", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), overwrite=True)
+    assert expected_path.exists()
+    assert Path(expected_path).stat().st_size == 540
+    expected_path.unlink()
+
+
+@pytest.mark.asyncio
+async def test_prepare_dataset_tar_no_path_with_overwrite(httpserver):
+    url = "/test.tar.gz"
+    expected_directory = Path("test")
+    try:
+        shutil.rmtree(expected_directory)  # clean up any previous test
+    except FileNotFoundError as e:
+        print(e)
+        pass
+
+    with open("tests/test.tar.gz", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url))
+
+    assert os.path.isdir(expected_directory)
+    with open(expected_directory / "1.txt") as f:
+        assert "I am the first test file" in f.read()
+    httpserver.clear()
+
+    with open("tests/test.tar.gz", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), overwrite=True)
+    assert os.path.isdir(expected_directory)
+    with open(expected_directory / "1.txt") as f:
+        assert "I am the first test file" in f.read()
+    expected_directory.unlink()
+
+
+@pytest.mark.asyncio
+async def test_prepare_dataset_zip_no_path_with_overwrite(httpserver):
+    url = "/test.zip"
+    expected_directory = Path("test")
+    try:
+        shutil.rmtree(expected_directory)  # clean up any previous test
+    except FileNotFoundError as e:
+        print(e)
+        pass
+
+    with open("tests/test.zip", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url))
+
+    assert os.path.isdir(expected_directory)
+    with open(expected_directory / "1.txt") as f:
+        assert "I am the first test file" in f.read()
+    httpserver.clear()
+
+    with open("tests/test.zip", "rb") as expected_data:
+        httpserver.expect_request(url).respond_with_data(expected_data)
+        await skillsnetwork.prepare_dataset(httpserver.url_for(url), overwrite=True)
+    assert os.path.isdir(expected_directory)
+    with open(expected_directory / "1.txt") as f:
+        assert "I am the first test file" in f.read()
+    expected_directory.unlink()
