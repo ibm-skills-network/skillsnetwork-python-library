@@ -58,6 +58,9 @@ exclude_patterns = []
 #
 html_theme = "pydata_sphinx_theme"
 
+# The path to the favicon icon
+html_favicon = "_static/SN_favicon.ico"
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
