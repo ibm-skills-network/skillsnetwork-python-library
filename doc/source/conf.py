@@ -10,10 +10,16 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import pathlib
-import sys
+import sys.path
+import skillsnetwork
 
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+from operator import attrgetter
+from os.path import relpath
+from inspect import getsourcefile, getsourcelines
+from pathlib import Path
+from subprocess import Popen
+
+sys.path.insert(0, Path(__file__).parents[2].resolve().as_posix())
 
 
 # -- Project information -----------------------------------------------------
@@ -37,7 +43,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.linkcode",
     "sphinx_autodoc_typehints",
 ]
 
@@ -72,3 +78,30 @@ html_theme_options = {
         "image_dark": "SN_web_darkmode.png",
     }
 }
+
+# -- Options for the linkcode extension --------------------------------------
+# Resolve function
+# This function is used to populate the (source) links in the API
+def linkcode_resolve(domain, info):
+    if domain != "py" or not info["module"] == "skillsnetwork":
+        return None
+    try:
+        obj = attrgetter(info["fullname"])(skillsnetwork)
+        fn = relpath(
+            getsourcefile(obj),
+            start=Path(skillsnetwork.__file__).parent,
+        )
+        source, lineno = getsourcelines(obj)
+        filename = f"skillsnetwork/{fn}#L{lineno}-L{lineno + len(source) - 1}"
+    except Exception as e:
+        return None
+
+    commit_hash = Popen(
+        ["git", "rev-parse", "HEAD"],
+        stdout=subprocess.PIPE,
+        universal_newlines=True,
+    ).communicate()[0][:-1]
+    return (
+        "https://github.com/ibm-skills-network/skillsnetwork-python-library/blob/%s/%s"
+        % (commit_hash, filename)
+    )
