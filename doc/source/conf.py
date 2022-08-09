@@ -17,7 +17,6 @@ from operator import attrgetter
 from os.path import relpath
 from inspect import getsourcefile, getsourcelines
 from pathlib import Path
-from subprocess import Popen
 
 sys.path.insert(0, Path(__file__).parents[2].resolve().as_posix())
 
@@ -95,8 +94,9 @@ def linkcode_resolve(domain, info):
         filename = f"skillsnetwork/{fn}#L{lineno}-L{lineno + len(source) - 1}"
     except Exception as e:
         return None
+    import subprocess
 
-    commit_hash = Popen(
+    commit_hash = subprocess.Popen(
         ["git", "rev-parse", "HEAD"],
         stdout=subprocess.PIPE,
         universal_newlines=True,
