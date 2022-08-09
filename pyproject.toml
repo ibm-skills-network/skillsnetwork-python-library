@@ -24,6 +24,7 @@ typing-extensions = {version = "*", python = "^3.5", optional = true}
 Sphinx = { version = "~4", optional = true }
 sphinx-autodoc-typehints = { version = "~1", optional = true }
 pydata-sphinx-theme = { version = "~0.9", optional = true }
+mistune = { version = ">=2.0.3", optional = true }
 
 [tool.poetry.extras]
 regular = ["ibm-cos-sdk", "typing-extensions"]
