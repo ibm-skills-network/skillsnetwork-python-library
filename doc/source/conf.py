@@ -91,7 +91,7 @@ def linkcode_resolve(domain, info):
             start=Path(skillsnetwork.__file__).parent,
         )
         source, lineno = getsourcelines(obj)
-        filename = f"skillsnetwork/{fn}#L{lineno}-L{lineno + len(source) - 1}"
+        fpath = f"skillsnetwork/{fn}#L{lineno}-L{lineno + len(source) - 1}"
     except Exception as e:
         return None
     import subprocess
@@ -101,7 +101,4 @@ def linkcode_resolve(domain, info):
         stdout=subprocess.PIPE,
         universal_newlines=True,
     ).communicate()[0][:-1]
-    return (
-        "https://github.com/ibm-skills-network/skillsnetwork-python-library/blob/%s/%s"
-        % (commit_hash, filename)
-    )
+    return f"https://github.com/ibm-skills-network/skillsnetwork-python-library/blob/{commit_hash}/{fpath}"
