@@ -1571,8 +1571,8 @@ regular = ["ibm-cos-sdk", "typing-extensions"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.7"
-content-hash = "f4a81e8e5ede1532d00394fcf705c0712a5b7e80542a84b1a4d860e072db6547"
+python-versions = "3.7.12"
+content-hash = "d808c057d4c19ed70cea001225a654f4820752bc669bd802b88a06309f827cab"
 
 [metadata.files]
 alabaster = [
