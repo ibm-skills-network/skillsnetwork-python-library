@@ -23,10 +23,10 @@ jobs:
       with:
         path: .venv
         key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+    - run: poetry install
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install -E regular --no-interaction --no-root
-    - run: poetry install
     - name: check style
       run: poetry run black . --check
     - name: run tests
