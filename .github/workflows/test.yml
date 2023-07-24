@@ -26,9 +26,7 @@ jobs:
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install -E regular --no-interaction --no-root
-    - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install -E regular --no-interaction --no-root
+    - name: Skip dependency installation
       if: steps.cached-poetry-dependencies.outputs.cache-hit == 'true'
       run: poetry install --no-interaction
     - name: check style
