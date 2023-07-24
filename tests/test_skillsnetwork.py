@@ -71,7 +71,6 @@ async def test_prepare_dataset_tar_no_path(httpserver):
         assert "I am the first test file" in f.read()
     os.unlink(expected_directory)
 
-
 @pytest.mark.asyncio
 async def test_prepare_dataset_tar_with_path(httpserver):
     url = "/test.tar.gz"
