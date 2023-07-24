@@ -3,14 +3,14 @@ on:
   push:
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       id: setup-python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.7.12'
+        python-version: '3.7.13'
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
@@ -26,9 +26,6 @@ jobs:
     - name: Install dependencies
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install -E regular --no-interaction --no-root
-    - name: Skip dependency installation
-      if: steps.cached-poetry-dependencies.outputs.cache-hit == 'true'
-      run: poetry install --no-interaction
     - name: check style
       run: poetry run black . --check
     - name: run tests
