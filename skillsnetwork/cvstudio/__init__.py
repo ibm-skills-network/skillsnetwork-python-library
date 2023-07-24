@@ -488,7 +488,6 @@ def getDataset(
             random_state=random_state,
             degrees=degrees,
         ):
-
             self.train_test = train_test
             self.transform = transform
             if self.transform is None:

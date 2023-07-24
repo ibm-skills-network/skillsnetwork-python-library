@@ -78,6 +78,7 @@ html_theme_options = {
     }
 }
 
+
 # -- Options for the linkcode extension --------------------------------------
 # Resolve function
 # This function is used to populate the (source) links in the API

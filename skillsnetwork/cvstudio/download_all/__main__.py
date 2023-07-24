@@ -9,7 +9,6 @@ def setup(interactive):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description="Download all images from CV Studio project."
     )

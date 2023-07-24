@@ -13,7 +13,6 @@ def download(interactive, token=None, public=False):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description="Download Model from CV Studio")
     parser.add_argument("-p", "--public", nargs="*", help="Access files publically")
     parser.add_argument(

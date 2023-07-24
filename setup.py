@@ -1,8 +1,8 @@
 import setuptools
- 
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
- 
+
 setuptools.setup(
     name="skillsnetwork",
     version="0.20.7-rc1",
@@ -17,5 +17,5 @@ setuptools.setup(
         "License :: OSI Approved :: GNU License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires=">=3.7",
 )
