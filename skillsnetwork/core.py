@@ -69,7 +69,7 @@ async def _get_chunks(url: str, chunk_size: int) -> Generator[bytes, None, None]
     desc = f"Downloading {Path(urlparse(url).path).name}"
     if _is_jupyterlite():
         from js import fetch  # pyright: ignore
-        from pyodide.ffi import JsException  # pyright: ignore
+        from pyodide import JsException  # pyright: ignore
 
         try:
             response = await fetch(url)
