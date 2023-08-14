@@ -18,6 +18,8 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         poetry --version
+        poetry self update
+        poetry --version
         make install-extras
     - name: Set package version
       run: poetry version "${{ github.event.release.tag_name }}"
