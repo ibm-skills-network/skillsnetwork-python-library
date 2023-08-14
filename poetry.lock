@@ -478,7 +478,7 @@ ipython = {version = ">=4.0.0", markers = "python_version >= \"3.3\""}
 ipython-genutils = ">=0.2.0,<0.3.0"
 jupyterlab-widgets = {version = ">=1.0.0", markers = "python_version >= \"3.6\""}
 traitlets = ">=4.3.1"
-widgetsnbextension = {version = "3.6.0"}
+widgetsnbextension = ">=3.6.0,<3.6.1"
 
 [package.extras]
 test = ["pytest (>=3.6.0)", "pytest-cov", "mock"]
