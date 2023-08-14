@@ -860,21 +860,22 @@ files = [
 
 [[package]]
 name = "ipywidgets"
-version = "7.7.4"
+version = "7.7.5"
 description = "IPython HTML widgets for Jupyter"
 optional = false
 python-versions = "*"
 files = [
-    {file = "ipywidgets-7.7.4-py2.py3-none-any.whl", hash = "sha256:295b7c9ba2c2e9d0c720b15bfe1f7c082db83540864d3ebc5bf57c92ae008bd6"},
-    {file = "ipywidgets-7.7.4.tar.gz", hash = "sha256:e2cca1f95b4b8e96e5c2c6ac7cfebacafb924a473df94a243a5e68b7b23172c7"},
+    {file = "ipywidgets-7.7.5-py2.py3-none-any.whl", hash = "sha256:d9644e473282ca28a6bc0327372bcad7a41877d0092fea1ed70bd15f28be9270"},
+    {file = "ipywidgets-7.7.5.tar.gz", hash = "sha256:2392943ed30253c84ac36f23f707fa1c9d34461ae5356944481a84d5b08d69b2"},
 ]
 
 [package.dependencies]
+ipykernel = ">=4.5.1"
 ipython = {version = ">=4.0.0", markers = "python_version >= \"3.3\""}
 ipython-genutils = ">=0.2.0,<0.3.0"
 jupyterlab-widgets = {version = ">=1.0.0,<3", markers = "python_version >= \"3.6\""}
 traitlets = ">=4.3.1"
-widgetsnbextension = ">=3.6.0,<3.7.0"
+widgetsnbextension = ">=3.6.4,<3.7.0"
 
 [package.extras]
 test = ["ipykernel", "mock", "pytest (>=3.6.0)", "pytest-cov"]
@@ -2785,13 +2786,13 @@ watchdog = ["watchdog (>=2.3)"]
 
 [[package]]
 name = "widgetsnbextension"
-version = "3.6.0"
+version = "3.6.4"
 description = "IPython HTML widgets for Jupyter"
 optional = false
 python-versions = "*"
 files = [
-    {file = "widgetsnbextension-3.6.0-py2.py3-none-any.whl", hash = "sha256:4fd321cad39fdcf8a8e248a657202d42917ada8e8ed5dd3f60f073e0d54ceabd"},
-    {file = "widgetsnbextension-3.6.0.tar.gz", hash = "sha256:e84a7a9fcb9baf3d57106e184a7389a8f8eb935bf741a5eb9d60aa18cc029a80"},
+    {file = "widgetsnbextension-3.6.4-py2.py3-none-any.whl", hash = "sha256:3d2d4994aea8681eb438493e439f59f82ba81d91f388a12e55147ae137f4120e"},
+    {file = "widgetsnbextension-3.6.4.tar.gz", hash = "sha256:ad1356c575d5add908afe886255deafb3f9b1589146a99279d1dcba5a05d16a5"},
 ]
 
 [package.dependencies]
@@ -2913,4 +2914,4 @@ regular = ["ibm-cos-sdk", "typing-extensions"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.8.17"
-content-hash = "3aacb6aa5fe35c00083165f32eb48055b78819a7cc060b51fa17f9528c8c9b1d"
+content-hash = "14666d47dbc908a3d29e1cabde3a111916948ff9ff1bb7443d2d8e91f0607d9f"

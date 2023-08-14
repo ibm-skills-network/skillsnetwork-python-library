@@ -18,7 +18,7 @@ requests = "~2"
 tqdm = "~4"
 ipywidgets = "~7"
 ipython = "*"
-widgetsnbextension = "3.6.0"
+widgetsnbextension = "3.6.4"
 ibm-cos-sdk = {version = "~2", optional = true}
 typing-extensions = {version = "*", python = "^3.8.17", optional = true}
 # Sphinx documentation dependencies
