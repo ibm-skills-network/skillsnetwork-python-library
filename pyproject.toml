@@ -20,7 +20,7 @@ ipywidgets = "7.7.1"
 ipython = "*"
 widgetsnbextension = "3.6.4"
 ibm-cos-sdk = {version = "~2", optional = true}
-typing-extensions = {version = "*", python = "^3.8.17", optional = true}
+typing-extensions = {version = "*", python = "^3.11.3", optional = true}
 # Sphinx documentation dependencies
 Sphinx = { version = "~4", optional = true }
 sphinx-autodoc-typehints = { version = "~1", optional = true }
