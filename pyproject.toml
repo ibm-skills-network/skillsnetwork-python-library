@@ -13,10 +13,10 @@ license = "MIT"
 
 
 [tool.poetry.dependencies]
-python = "3.8.17"
+python = "3.11.3"
 requests = "~2"
 tqdm = "~4"
-ipywidgets = "~7"
+ipywidgets = "7.7.1"
 ipython = "*"
 widgetsnbextension = "3.6.4"
 ibm-cos-sdk = {version = "~2", optional = true}
