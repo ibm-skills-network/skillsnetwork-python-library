@@ -16,8 +16,9 @@ license = "MIT"
 python = "3.11.3"
 requests = "~2"
 tqdm = "~4"
-ipywidgets = "~7"
+ipywidgets = ">=8.1.1,<9"
 ipython = "*"
+widgetsnbextension = ">=4.0.10,<5"
 ibm-cos-sdk = ">=2.13.3"
 typing-extensions = {version = "*", python = "^3.11.3", optional = true}
 # Sphinx documentation dependencies
