@@ -2853,4 +2853,4 @@ regular = ["ibm-cos-sdk", "typing-extensions"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.12.2"
-content-hash = "caa603cd15f96e5348c835849ca17a6f5d36548d1cffdd4a7c999670ca9b49c8"
+content-hash = "47c1249ea9f56f3eae74315c1ad583170a8ccda68a0bd59260bdd3514c6ab22f"
