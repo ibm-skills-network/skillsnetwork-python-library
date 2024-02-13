@@ -13,13 +13,13 @@ license = "MIT"
 
 
 [tool.poetry.dependencies]
-python = "3.7.17"
+python = "3.11.3"
 requests = "~2"
 tqdm = "~4"
 ipywidgets = "~7"
 ipython = "*"
-ibm-cos-sdk = {version = "~2", optional = true}
-typing-extensions = {version = "*", python = "^3.7.17", optional = true}
+ibm-cos-sdk = ">=2.13.3"
+typing-extensions = {version = "*", python = "^3.11.3", optional = true}
 # Sphinx documentation dependencies
 Sphinx = { version = "~4", optional = true }
 sphinx-autodoc-typehints = { version = "~1", optional = true }
@@ -45,5 +45,5 @@ testpaths = [
 asyncio_mode = "auto"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core=1.7.1"]
 build-backend = "poetry.core.masonry.api"
