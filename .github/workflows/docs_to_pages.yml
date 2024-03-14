@@ -6,15 +6,16 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.11.3'
+        python-version: '3.11'
     - name: Install poetry
-      uses: abatilo/actions-poetry@v2.0.0
+      run: |
+        pip install "poetry>=1.8.2,<2"
     - name: Install docs building dependencies
       run: |
-        python3 -m pip install --upgrade pip
+        poetry --version
         make install-docs
     - name: Build documentation
       run: |
@@ -26,4 +27,4 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: doc/build/html
-        branch: docs
+        branch: gh-pages
