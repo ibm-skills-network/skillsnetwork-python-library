@@ -1,0 +1,6 @@
+﻿skillsnetwork.read
+==================
+
+.. currentmodule:: skillsnetwork
+
+.. autofunction:: read
