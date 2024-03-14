@@ -26,12 +26,11 @@ To upgrade or ensure the most recent version is installed:
 JupyterLite
 +++++++++++
 
-Using the ``piplite`` library:
+Using the ``%pip`` magic command:
 
 .. code-block:: python
 
-   import piplite
-   await piplite.install(["skillsnetwork"])
+   %pip install skillsnetwork
 
 Reading Files From URL
 ----------------------
