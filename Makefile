@@ -7,7 +7,7 @@ install-extras:
 				poetry install -E regular
 
 install-docs:
-				poetry install --no-root -E docs
+				poetry install -E docs
 
 update:
 				poetry update
