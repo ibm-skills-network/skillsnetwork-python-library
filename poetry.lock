@@ -1279,37 +1279,36 @@ files = [
 
 [[package]]
 name = "jupyterlite"
-version = "0.2.3"
+version = "0.3.0"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "jupyterlite-0.2.3-py3-none-any.whl", hash = "sha256:b5e7cc43c79f53b3c0a66f24baeef4330418f11dcf7d0ae8427961483cd429ae"},
-    {file = "jupyterlite-0.2.3.tar.gz", hash = "sha256:20dcbfd9e1f850c96ffa46a5f3f98116e481d0be198fc482491c15d5411fe510"},
+    {file = "jupyterlite-0.3.0-py3-none-any.whl", hash = "sha256:f011943bf945f415bc4edbfb8f51ced74a82835520be1ecc973afa47936dc3f0"},
+    {file = "jupyterlite-0.3.0.tar.gz", hash = "sha256:824c9a6dad850766ececf4863052b944543b0650fe1be8c7a99d9df0150a5c60"},
 ]
 
 [package.dependencies]
-jupyterlite-core = ">=0.2.3"
-jupyterlite-javascript-kernel = "*"
+jupyterlite-core = ">=0.3.0"
 
 [package.extras]
-all = ["jsonschema (>=3)", "jupyter-server", "jupyterlab (>=4.0.11,<5.0)", "jupyterlab-server (>=2.8.1,<3)", "libarchive-c (>=4.0)", "notebook (>=7.0.7,<8.0)", "pkginfo", "tornado (>=6.1)"]
+all = ["jsonschema (>=3)", "jupyter-server", "jupyterlab (>=4.1.1,<4.2)", "jupyterlab-server (>=2.8.1,<3)", "libarchive-c (>=4.0)", "notebook (>=7.1.0,<7.2)", "pkginfo", "tornado (>=6.1)"]
 check = ["jsonschema[format-nongpl] (>=3)"]
 contents = ["jupyter-server"]
-lab = ["jupyterlab (>=4.0.11,<5.0)", "notebook (>=7.0.7,<8.0)"]
+lab = ["jupyterlab (>=4.1.0,<4.2)", "notebook (>=7.1.0,<7.2)"]
 libarchive = ["libarchive-c (>=4.0)"]
 serve = ["tornado (>=6.1)"]
 translation = ["jupyterlab-server (>=2.8.1,<3)"]
 
 [[package]]
 name = "jupyterlite-core"
-version = "0.2.3"
+version = "0.3.0"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "jupyterlite_core-0.2.3-py3-none-any.whl", hash = "sha256:a439ce73b84a4c24b1fe60f4ec9fe6b477b4466f49e7bc8d5016f272c28aaa94"},
-    {file = "jupyterlite_core-0.2.3.tar.gz", hash = "sha256:e8733074bda54c811997f5baf60a8c39b712768c2f899d2852a61b12b582a9f8"},
+    {file = "jupyterlite_core-0.3.0-py3-none-any.whl", hash = "sha256:247cc34ae6fedda41b15ce4778997164508b2039bc92480665cadfe955193467"},
+    {file = "jupyterlite_core-0.3.0.tar.gz", hash = "sha256:5a97e74a93d487c0a2ce6a4615cd721a39686cdce9d329c241404e985157f8f9"},
 ]
 
 [package.dependencies]
@@ -1318,25 +1317,14 @@ importlib-metadata = {version = ">=3.6", markers = "python_version < \"3.10\""}
 jupyter-core = ">=4.7"
 
 [package.extras]
-all = ["jsonschema (>=3)", "jupyter-server", "jupyterlab (>=4.0.11,<5.0)", "jupyterlab-server (>=2.8.1,<3)", "libarchive-c (>=4.0)", "notebook (>=7.0.7,<8.0)", "pkginfo", "tornado (>=6.1)"]
+all = ["jsonschema (>=3)", "jupyter-server", "jupyterlab (>=4.1.1,<4.2)", "jupyterlab-server (>=2.8.1,<3)", "libarchive-c (>=4.0)", "notebook (>=7.1.0,<7.2)", "pkginfo", "tornado (>=6.1)"]
 check = ["jsonschema[format-nongpl] (>=3)"]
 contents = ["jupyter-server"]
-lab = ["jupyterlab (>=4.0.11,<5.0)", "notebook (>=7.0.7,<8.0)"]
+lab = ["jupyterlab (>=4.1.1,<4.2)", "notebook (>=7.1.0,<7.2)"]
 libarchive = ["libarchive-c (>=4.0)"]
 serve = ["tornado (>=6.1)"]
 test = ["ansi2html", "diffoscope", "pytest-console-scripts", "pytest-cov", "pytest-html", "pytest-xdist"]
 translation = ["jupyterlab-server (>=2.8.1,<3)"]
-
-[[package]]
-name = "jupyterlite-javascript-kernel"
-version = "0.2.3"
-description = "JavaScript kernel for JupyterLite running in a Web Worker"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "jupyterlite_javascript_kernel-0.2.3-py3-none-any.whl", hash = "sha256:ba0f7b4292305ea946906431653f72987c9d44864770e2ff1980f7ddadf235c3"},
-    {file = "jupyterlite_javascript_kernel-0.2.3.tar.gz", hash = "sha256:61a8a189b59ed697f903279477b06013bce9b2bd3135204129ba13bed2d1a054"},
-]
 
 [[package]]
 name = "markupsafe"
@@ -2777,4 +2765,4 @@ regular = ["ibm-cos-sdk", "typing-extensions"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "170fb6dd0427a99370389eaed0acf10313d43bc916354802fe4470d4581bb3bc"
+content-hash = "ab83faa6e2ff744a123b0d1d4764102959f50aa36badc5a4023e9674cb7243e3"
