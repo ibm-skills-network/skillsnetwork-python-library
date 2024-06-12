@@ -716,33 +716,33 @@ socks = ["socksio (==1.*)"]
 
 [[package]]
 name = "ibm-cos-sdk"
-version = "2.13.4"
+version = "2.13.5"
 description = "IBM SDK for Python"
 optional = false
-python-versions = ">= 3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "ibm-cos-sdk-2.13.4.tar.gz", hash = "sha256:ee06bb89205e2bd031967e7a0d3fc47b39363be03badc49442202394a791d24a"},
+    {file = "ibm-cos-sdk-2.13.5.tar.gz", hash = "sha256:1aff7f9863ac9072a3db2f0053bec99478b26f3fb5fa797ce96a15bbb13cd40e"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.13.4"
-ibm-cos-sdk-s3transfer = "2.13.4"
+ibm-cos-sdk-core = "2.13.5"
+ibm-cos-sdk-s3transfer = "2.13.5"
 jmespath = ">=0.10.0,<=1.0.1"
 
 [[package]]
 name = "ibm-cos-sdk-core"
-version = "2.13.4"
+version = "2.13.5"
 description = "Low-level, data-driven core of IBM SDK for Python"
 optional = false
-python-versions = ">= 3.6"
+python-versions = ">=3.6"
 files = [
-    {file = "ibm-cos-sdk-core-2.13.4.tar.gz", hash = "sha256:c0f3c03b6c21bb69d3dedd2a1bb647621e0d99e0e1c0929d2c36bd45cfd4166c"},
+    {file = "ibm-cos-sdk-core-2.13.5.tar.gz", hash = "sha256:d3a99d8b06b3f8c00b1a9501f85538d592463e63ddf8cec32672ab5a0b107b83"},
 ]
 
 [package.dependencies]
 jmespath = ">=0.10.0,<=1.0.1"
-python-dateutil = ">=2.8.2,<3.0.0"
-requests = ">=2.31.0,<3.0"
+python-dateutil = ">=2.9.0,<3.0.0"
+requests = ">=2.32.3,<3.0"
 urllib3 = [
     {version = ">=1.26.18,<1.27", markers = "python_version < \"3.10\""},
     {version = ">=1.26.18,<2.2", markers = "python_version >= \"3.10\""},
@@ -750,16 +750,16 @@ urllib3 = [
 
 [[package]]
 name = "ibm-cos-sdk-s3transfer"
-version = "2.13.4"
+version = "2.13.5"
 description = "IBM S3 Transfer Manager"
 optional = false
-python-versions = ">= 3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "ibm-cos-sdk-s3transfer-2.13.4.tar.gz", hash = "sha256:3c93feaf66254803b2b8523720efaf90e7374b544ac0a411099617f3b4689279"},
+    {file = "ibm-cos-sdk-s3transfer-2.13.5.tar.gz", hash = "sha256:9649b1f2201c6de96ff5a6b5a3686de3a809e6ef3b8b12c7c4f2f7ce72da7749"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.13.4"
+ibm-cos-sdk-core = "2.13.5"
 
 [[package]]
 name = "idna"
