@@ -1277,17 +1277,17 @@ files = [
 
 [[package]]
 name = "jupyterlite"
-version = "0.4.4"
+version = "0.4.5"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "jupyterlite-0.4.4-py3-none-any.whl", hash = "sha256:4533b6f255b6dba6b04b03813f10e5c582214350abb5d6f9646f020147fb8437"},
-    {file = "jupyterlite-0.4.4.tar.gz", hash = "sha256:aac034c0e02f23f8fdf512790406f2ae2507ce9e327dd285849b2fd5341fd8c7"},
+    {file = "jupyterlite-0.4.5-py3-none-any.whl", hash = "sha256:3b05e4025fe6fefb2c15e1b6fca6c666f877f411e65aaafd3637326d0d50c403"},
+    {file = "jupyterlite-0.4.5.tar.gz", hash = "sha256:473de4b1dba6385670ca25b46aa8bdfe8bec665abaf54b3ddd28557611b12e97"},
 ]
 
 [package.dependencies]
-jupyterlite-core = ">=0.4.4"
+jupyterlite-core = ">=0.4.5"
 
 [package.extras]
 all = ["jsonschema (>=3)", "jupyter-server", "jupyterlab (>=4.2.5,<4.3)", "jupyterlab-server (>=2.8.1,<3)", "libarchive-c (>=4.0)", "notebook (>=7.2.1,<7.3)", "pkginfo", "tornado (>=6.1)"]
@@ -1300,13 +1300,13 @@ translation = ["jupyterlab-server (>=2.8.1,<3)"]
 
 [[package]]
 name = "jupyterlite-core"
-version = "0.4.4"
+version = "0.4.5"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "jupyterlite_core-0.4.4-py3-none-any.whl", hash = "sha256:cb64b5649c8171027cfaceed7d1615098a5c6db270cb8be281ca3f4b6caa4094"},
-    {file = "jupyterlite_core-0.4.4.tar.gz", hash = "sha256:652b156c9e0a1236109393c954923305cd347f10673ac373f89a69e4460c6c47"},
+    {file = "jupyterlite_core-0.4.5-py3-none-any.whl", hash = "sha256:2c30b815b0699d50160bfec35ff612295f8518ac66cf52acd7bfe41aa42ce0be"},
+    {file = "jupyterlite_core-0.4.5.tar.gz", hash = "sha256:beddbe3a1064591efbfdfec0da5bc80ec491efd53501fcf8ad05ea225900cf08"},
 ]
 
 [package.dependencies]
