@@ -31,7 +31,8 @@ docs = ["Sphinx", "sphinx-autodoc-typehints", "pydata-sphinx-theme"]
 
 [tool.poetry.dev-dependencies]
 jupyterlab = "~4"
-jupyterlite = "^0.4.0"
+jupyterlite = "0.4.0"
+jupyterlite-pyodide-kernel = "0.4.7"
 build = "^0.10.0"
 pytest = "~7"
 pytest-asyncio = "^0.23.0"
