@@ -38,7 +38,7 @@ build = "^0.10.0"
 pytest = "~7"
 pytest-asyncio = "^0.23.0"
 pytest-httpserver = "^1.0.4"
-black = {version = "~22", allow-prereleases = true}
+black = {version = "~24", allow-prereleases = true}
 
 [tool.pytest.ini_options]
 testpaths = [
