@@ -793,53 +793,62 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "ibm-cos-sdk"
-version = "2.14.3"
+version = "2.15.0"
 description = "IBM SDK for Python"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk-2.14.3.tar.gz", hash = "sha256:643b6f2aa1683adad7f432df23407d11ae5adb9d9ad01214115bee77dc64364a"},
+    {file = "ibm_cos_sdk-2.15.0.tar.gz", hash = "sha256:2232b86dd10bd40609bf2694fd1ccdc9097491fba52edbf697fa35eb283dc33e"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.14.3"
-ibm-cos-sdk-s3transfer = "2.14.3"
+ibm-cos-sdk-core = "2.15.0"
+ibm-cos-sdk-s3transfer = "2.15.0"
 jmespath = ">=0.10.0,<=1.0.1"
+
+[package.extras]
+crt = ["ibm_botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "ibm-cos-sdk-core"
-version = "2.14.3"
+version = "2.15.0"
 description = "Low-level, data-driven core of IBM SDK for Python"
 optional = false
 python-versions = ">=3.6"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk_core-2.14.3.tar.gz", hash = "sha256:85dee7790c92e8db69bf39dae4c02cac211e3c1d81bb86e64fa2d1e929674623"},
+    {file = "ibm_cos_sdk_core-2.15.0.tar.gz", hash = "sha256:3656933d7ffa02a236b87b8405569163f81c35de54537c01dfb574a820d92b31"},
 ]
 
 [package.dependencies]
 jmespath = ">=0.10.0,<=1.0.1"
 python-dateutil = ">=2.9.0,<3.0.0"
-requests = ">=2.32.4,<3.0.0"
+requests = ">=2.32.5,<3.0.0"
 urllib3 = ">=2.5.0,<3"
+
+[package.extras]
+crt = ["awscrt (==0.29.1)"]
 
 [[package]]
 name = "ibm-cos-sdk-s3transfer"
-version = "2.14.3"
+version = "2.15.0"
 description = "IBM S3 Transfer Manager"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk_s3transfer-2.14.3.tar.gz", hash = "sha256:2251ebfc4a46144401e431f4a5d9f04c262a0d6f95c88a8e71071da056e55f72"},
+    {file = "ibm_cos_sdk_s3transfer-2.15.0.tar.gz", hash = "sha256:659cd05480449e0c17e88a290f0a58efae695ad222c49604979a3266fdf4fd12"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.14.3"
+ibm-cos-sdk-core = "2.15.0"
+
+[package.extras]
+crt = ["ibm_botocore[crt] (>=1.37.4,<2.0a0)"]
 
 [[package]]
 name = "idna"
