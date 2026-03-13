@@ -793,19 +793,19 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "ibm-cos-sdk"
-version = "2.16.0"
+version = "2.16.1"
 description = "IBM SDK for Python"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk-2.16.0.tar.gz", hash = "sha256:ef11ceb121dc5c90050e87a82b6d27e67394c58f1c7abcc991a3d9a0964a290a"},
+    {file = "ibm_cos_sdk-2.16.1.tar.gz", hash = "sha256:5f2d0c1f24f45b9f62caf37136c96ffece0a35d13097fda66774d63370d4faa9"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.16.0"
-ibm-cos-sdk-s3transfer = "2.16.0"
+ibm-cos-sdk-core = "2.16.1"
+ibm-cos-sdk-s3transfer = "2.16.1"
 jmespath = ">=0.10.0,<=1.0.1"
 
 [package.extras]
@@ -813,14 +813,14 @@ crt = ["ibm_botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "ibm-cos-sdk-core"
-version = "2.16.0"
+version = "2.16.1"
 description = "Low-level, data-driven core of IBM SDK for Python"
 optional = false
 python-versions = ">=3.6"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk_core-2.16.0.tar.gz", hash = "sha256:2707d0ca62dd6f85455c4ac02ed37aa35ea1f2b143666271237f979d4fe904f7"},
+    {file = "ibm_cos_sdk_core-2.16.1.tar.gz", hash = "sha256:28449ca82604d5feae8058790e43baa872bab72ab8ea1d55bc01a272173d5e07"},
 ]
 
 [package.dependencies]
@@ -834,18 +834,18 @@ crt = ["awscrt (==0.30.0)"]
 
 [[package]]
 name = "ibm-cos-sdk-s3transfer"
-version = "2.16.0"
+version = "2.16.1"
 description = "IBM S3 Transfer Manager"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "extra == \"regular\""
 files = [
-    {file = "ibm_cos_sdk_s3transfer-2.16.0.tar.gz", hash = "sha256:5cca69c48dcb7a1442b39cadb3a635162fbc2cf002820c8cd6cb170056d27c5c"},
+    {file = "ibm_cos_sdk_s3transfer-2.16.1.tar.gz", hash = "sha256:1cf875b7ea3a4e6d97f55d02af9122bde59c7f305e5da8debb83c7fdbc2668ea"},
 ]
 
 [package.dependencies]
-ibm-cos-sdk-core = "2.16.0"
+ibm-cos-sdk-core = "2.16.1"
 
 [package.extras]
 crt = ["ibm_botocore[crt] (>=1.37.4,<2.0a0)"]
