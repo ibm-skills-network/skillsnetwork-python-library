@@ -798,7 +798,7 @@ description = "IBM SDK for Python"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"regular\""
+markers = "python_version < \"3.14\" and extra == \"regular\""
 files = [
     {file = "ibm_cos_sdk-2.16.1.tar.gz", hash = "sha256:5f2d0c1f24f45b9f62caf37136c96ffece0a35d13097fda66774d63370d4faa9"},
 ]
@@ -812,13 +812,33 @@ jmespath = ">=0.10.0,<=1.0.1"
 crt = ["ibm_botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
+name = "ibm-cos-sdk"
+version = "2.16.2"
+description = "IBM SDK for Python"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version >= \"3.14\" and extra == \"regular\""
+files = [
+    {file = "ibm_cos_sdk-2.16.2.tar.gz", hash = "sha256:b9ec5a390606b29a179736b34b90e829988b281eaa66fe5002bd9dac09adea3a"},
+]
+
+[package.dependencies]
+ibm-cos-sdk-core = "2.16.2"
+ibm-cos-sdk-s3transfer = "2.16.2"
+jmespath = ">=0.10.0,<=1.0.1"
+
+[package.extras]
+crt = ["ibm_botocore[crt] (>=1.21.0,<2.0a0)"]
+
+[[package]]
 name = "ibm-cos-sdk-core"
 version = "2.16.1"
 description = "Low-level, data-driven core of IBM SDK for Python"
 optional = false
 python-versions = ">=3.6"
 groups = ["main"]
-markers = "extra == \"regular\""
+markers = "python_version < \"3.14\" and extra == \"regular\""
 files = [
     {file = "ibm_cos_sdk_core-2.16.1.tar.gz", hash = "sha256:28449ca82604d5feae8058790e43baa872bab72ab8ea1d55bc01a272173d5e07"},
 ]
@@ -833,19 +853,58 @@ urllib3 = ">=2.6.2,<3"
 crt = ["awscrt (==0.30.0)"]
 
 [[package]]
+name = "ibm-cos-sdk-core"
+version = "2.16.2"
+description = "Low-level, data-driven core of IBM SDK for Python"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+markers = "python_version >= \"3.14\" and extra == \"regular\""
+files = [
+    {file = "ibm_cos_sdk_core-2.16.2.tar.gz", hash = "sha256:b975bc53ae8fdac8356851d8f66e4d286eaa8d8de3322d6f1734b76a6867f695"},
+]
+
+[package.dependencies]
+jmespath = ">=0.10.0,<=1.0.1"
+python-dateutil = ">=2.9.0,<3.0.0"
+requests = ">=2.33.0,<3.0.0"
+urllib3 = ">=2.6.2,<3"
+
+[package.extras]
+crt = ["awscrt (==0.30.0)"]
+
+[[package]]
 name = "ibm-cos-sdk-s3transfer"
 version = "2.16.1"
 description = "IBM S3 Transfer Manager"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"regular\""
+markers = "python_version < \"3.14\" and extra == \"regular\""
 files = [
     {file = "ibm_cos_sdk_s3transfer-2.16.1.tar.gz", hash = "sha256:1cf875b7ea3a4e6d97f55d02af9122bde59c7f305e5da8debb83c7fdbc2668ea"},
 ]
 
 [package.dependencies]
 ibm-cos-sdk-core = "2.16.1"
+
+[package.extras]
+crt = ["ibm_botocore[crt] (>=1.37.4,<2.0a0)"]
+
+[[package]]
+name = "ibm-cos-sdk-s3transfer"
+version = "2.16.2"
+description = "IBM S3 Transfer Manager"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+markers = "python_version >= \"3.14\" and extra == \"regular\""
+files = [
+    {file = "ibm_cos_sdk_s3transfer-2.16.2.tar.gz", hash = "sha256:c07e5d244c3f9e67f9da0186f8434ee60f34ce1f842378c8f4cf885670928788"},
+]
+
+[package.dependencies]
+ibm-cos-sdk-core = "2.16.2"
 
 [package.extras]
 crt = ["ibm_botocore[crt] (>=1.37.4,<2.0a0)"]
