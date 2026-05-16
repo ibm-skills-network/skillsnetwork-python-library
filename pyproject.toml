@@ -36,7 +36,7 @@ jupyterlite-core = "0.4.1"
 jupyterlite-pyodide-kernel = "0.4.7"
 build = "^0.10.0"
 pytest = "~7"
-pytest-asyncio = "^0.23.0"
+pytest-asyncio = "^0.26.0"
 pytest-httpserver = "^1.0.4"
 black = {version = "~24", allow-prereleases = true}
 
