@@ -29,5 +29,4 @@ jobs:
     - name: check style
       run: poetry run black . --check
     - name: run tests
-      # Only run tests for skillsnetwork since cv studio tests not working from CI
-      run: poetry run pytest tests/ -k 'test_skillsnetwork.py'
+      run: poetry run pytest tests/
