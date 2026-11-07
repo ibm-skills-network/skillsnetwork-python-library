@@ -11,7 +11,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.11.3'
+        python-version: '3.11'
     - name: Install poetry
       uses: abatilo/actions-poetry@v3.0.0
     - name: Install project dependencies
@@ -29,8 +29,7 @@ jobs:
         files: |
           dist/*
     - name: run tests
-      # Only run tests for skillsnetwork since cv studio tests not working from CI
-      run: poetry run pytest tests/ -k 'test_skillsnetwork.py'
+      run: poetry run pytest tests/
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
       with:

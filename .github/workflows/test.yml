@@ -10,7 +10,7 @@ jobs:
       id: setup-python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11.3'
+        python-version: '3.11'
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
@@ -29,5 +29,4 @@ jobs:
     - name: check style
       run: poetry run black . --check
     - name: run tests
-      # Only run tests for skillsnetwork since cv studio tests not working from CI
-      run: poetry run pytest tests/ -k 'test_skillsnetwork.py'
+      run: poetry run pytest tests/
