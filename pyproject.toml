@@ -18,7 +18,6 @@ requests = "~2"
 tqdm = "~4"
 ipywidgets = "<=8.1.8"
 ipython = "*"
-ibm-cos-sdk = ">=2.13.3"
 typing-extensions = {version = "*", python = "^3.11.3", optional = true}
 # Sphinx documentation dependencies
 Sphinx = { version = "~4", optional = true }
@@ -26,7 +25,7 @@ sphinx-autodoc-typehints = { version = "~1", optional = true }
 pydata-sphinx-theme = { version = "~0.9", optional = true }
 
 [tool.poetry.extras]
-regular = ["ibm-cos-sdk", "typing-extensions"]
+regular = ["typing-extensions"]
 docs = ["Sphinx", "sphinx-autodoc-typehints", "pydata-sphinx-theme"]
 
 [tool.poetry.dev-dependencies]

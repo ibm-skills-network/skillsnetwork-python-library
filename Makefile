@@ -1,4 +1,4 @@
-.PHONY: install install-extras install-docs build local-pypi jupyterlite-dev jupyterlab-dev format test test-core clean
+.PHONY: install install-extras install-docs build local-pypi jupyterlite-dev jupyterlab-dev format test clean
 
 install:
 				poetry install
@@ -32,9 +32,6 @@ format:
 
 test:
 				poetry run pytest -rP tests/
-
-test-core:
-				poetry run pytest tests/ -k 'test_skillsnetwork.py'
 
 clean:
 				rm *.ipynb || echo "no notebooks to clean up"
